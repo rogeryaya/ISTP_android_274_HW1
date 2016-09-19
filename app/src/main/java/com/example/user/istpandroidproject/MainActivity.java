@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class MainActivity extends CustomizedActivity implements View.OnClickList
     EditText nameText;
     RadioGroup optionsGrp;
     Button confirmBtn;
+    CheckBox hideCheckBox;
 
     String nameOfTheTrainer;
     int selectedOptionIndex;
@@ -49,29 +51,39 @@ public class MainActivity extends CustomizedActivity implements View.OnClickList
         confirmBtn = (Button)findViewById(R.id.confirmButton);
         confirmBtn.setOnClickListener(this);
 
+        hideCheckBox =(CheckBox)findViewById(R.id.hide_checkBox);
+
+        confirmBtn = (Button)findViewById(R.id.confirmButton);
+
         uiHandler = new Handler(getMainLooper());
     }
 
     @Override
     public void onClick(View v) {
+        String welcomeMessage = null;
         int viewId = v.getId();
         if(viewId == R.id.confirmButton) {
-
             nameOfTheTrainer = nameText.getText().toString();
 
             int selectedRadioButtonViewId = optionsGrp.getCheckedRadioButtonId();
             View selectedRadioButton = optionsGrp.findViewById(selectedRadioButtonViewId);
             selectedOptionIndex = optionsGrp.indexOfChild(selectedRadioButton);
 
-            String welcomeMessage = String.format(
-                    "你好, 訓練家%s 歡迎來到神奇寶貝的世界, 你的第一個夥伴是%s",
-                    nameOfTheTrainer,
-                    pokemonNames[selectedOptionIndex]);
+            if (hideCheckBox.isChecked() == true) {
+                welcomeMessage = String.format(
+                        "你好,歡迎來到神奇寶貝的世界, 你的第一個夥伴是%s",
+                        pokemonNames[selectedOptionIndex]);
+            } else {
+                welcomeMessage = String.format(
+                        "你好, 訓練家%s 歡迎來到神奇寶貝的世界, 你的第一個夥伴是%s",
+                        nameOfTheTrainer,
+                        pokemonNames[selectedOptionIndex]);
+            }
+                infoText.setText(welcomeMessage);
 
-            infoText.setText(welcomeMessage);
+                //execute jumpToNewActivityTask on Main thread after 3 secs
+                uiHandler.postDelayed(jumpToNewActivityTask, 3 * 1000);
 
-            //execute jumpToNewActivityTask on Main thread after 3 secs
-            uiHandler.postDelayed(jumpToNewActivityTask, 3 * 1000);
 
         }
 

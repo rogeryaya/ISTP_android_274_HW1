@@ -47,29 +47,30 @@
             android:layout_below="@+id/nameText"
             android:layout_centerHorizontal="true"
             android:id="@+id/optionsGroup"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="小火龍"
                 android:id="@+id/radioButton"
                 android:layout_gravity="left"
-                android:checked="true" />
+                android:checked="true"
+                android:background="@drawable/charmander_thumbnail" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="傑尼龜"
                 android:id="@+id/radioButton2"
-                android:layout_gravity="left" />
+                android:layout_gravity="left"
+                android:background="@drawable/squirtle_thumbnail" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="妙蛙種子"
                 android:id="@+id/radioButton3"
-                android:layout_gravity="left" />
+                android:layout_gravity="left"
+                android:background="@drawable/bulbasaur_thumbnail" />
         </RadioGroup>
 
         <Button
